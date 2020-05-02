@@ -13,6 +13,10 @@
 		3E18436D245B22EF001D40DD /* MobileUsageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18436B245B22EF001D40DD /* MobileUsageTableViewCell.swift */; };
 		3E18436F245B29D7001D40DD /* MobileUsageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18436E245B29D7001D40DD /* MobileUsageData.swift */; };
 		3E184370245B29D7001D40DD /* MobileUsageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18436E245B29D7001D40DD /* MobileUsageData.swift */; };
+		3E63A479245D4A8E00B75277 /* MobileDataAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63A478245D4A8E00B75277 /* MobileDataAPIClient.swift */; };
+		3E63A47A245D4A8E00B75277 /* MobileDataAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63A478245D4A8E00B75277 /* MobileDataAPIClient.swift */; };
+		3E63A47C245D531F00B75277 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63A47B245D531F00B75277 /* NetworkManager.swift */; };
+		3E63A47D245D531F00B75277 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63A47B245D531F00B75277 /* NetworkManager.swift */; };
 		3EAD10AA245AA36000EEEB40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD10A9245AA36000EEEB40 /* AppDelegate.swift */; };
 		3EAD10AC245AA36000EEEB40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD10AB245AA36000EEEB40 /* SceneDelegate.swift */; };
 		3EAD10AE245AA36000EEEB40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD10AD245AA36000EEEB40 /* ViewController.swift */; };
@@ -46,6 +50,8 @@
 		3E184366245ADC55001D40DD /* JSONFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFields.swift; sourceTree = "<group>"; };
 		3E18436B245B22EF001D40DD /* MobileUsageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileUsageTableViewCell.swift; sourceTree = "<group>"; };
 		3E18436E245B29D7001D40DD /* MobileUsageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileUsageData.swift; sourceTree = "<group>"; };
+		3E63A478245D4A8E00B75277 /* MobileDataAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileDataAPIClient.swift; sourceTree = "<group>"; };
+		3E63A47B245D531F00B75277 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3EAD10A6245AA36000EEEB40 /* com.dev.mobileStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = com.dev.mobileStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EAD10A9245AA36000EEEB40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3EAD10AB245AA36000EEEB40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				3EB09BE1245C88B8003A87E1 /* OfflineCacheManager.swift */,
+				3E63A478245D4A8E00B75277 /* MobileDataAPIClient.swift */,
+				3E63A47B245D531F00B75277 /* NetworkManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -380,7 +388,9 @@
 				3EB09BE2245C88B8003A87E1 /* OfflineCacheManager.swift in Sources */,
 				3EAD10AE245AA36000EEEB40 /* ViewController.swift in Sources */,
 				3EAD10AA245AA36000EEEB40 /* AppDelegate.swift in Sources */,
+				3E63A47C245D531F00B75277 /* NetworkManager.swift in Sources */,
 				3E18436F245B29D7001D40DD /* MobileUsageData.swift in Sources */,
+				3E63A479245D4A8E00B75277 /* MobileDataAPIClient.swift in Sources */,
 				3E18436C245B22EF001D40DD /* MobileUsageTableViewCell.swift in Sources */,
 				3EAD10AC245AA36000EEEB40 /* SceneDelegate.swift in Sources */,
 				3EB09BD7245BD1E5003A87E1 /* MobileUsageTableViewHeader.swift in Sources */,
@@ -394,7 +404,9 @@
 			files = (
 				3E184368245ADC55001D40DD /* JSONFields.swift in Sources */,
 				3E18436D245B22EF001D40DD /* MobileUsageTableViewCell.swift in Sources */,
+				3E63A47A245D4A8E00B75277 /* MobileDataAPIClient.swift in Sources */,
 				3EB09BD8245BD1E5003A87E1 /* MobileUsageTableViewHeader.swift in Sources */,
+				3E63A47D245D531F00B75277 /* NetworkManager.swift in Sources */,
 				3EB09BDF245C551F003A87E1 /* DetailViewController.swift in Sources */,
 				3EAD10C1245AA36200EEEB40 /* com_dev_mobileStatsTests.swift in Sources */,
 				3E184370245B29D7001D40DD /* MobileUsageData.swift in Sources */,

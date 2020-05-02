@@ -20,13 +20,6 @@ class ViewController: UIViewController {
     
     var mobileUsageData = MobileUsageData()
     
-    private let RESOURCEID = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
-    
-    struct DataRequest : Encodable{
-        let resource_id : String
-        let limit : Int
-        let offset: Int
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +31,11 @@ class ViewController: UIViewController {
     }
     
     private func initStartingLoad(){
-        do{
-            if try Reachability().connection != .unavailable{
-                refreshControl.isEnabled = true
-                getMobileDataUsage(numberOfItems: 1,offset: 0)
-            }
-            else{
-                loadOfflineCache()
-            }
-        }
-        catch{
-            print(error)
-        }
+        getMobileDataUsage(numberOfItems: 1,offset: 0)
     }
     
     private func initRefreshControlConfiguration(){
+        refreshControl.isEnabled = true
         refreshControl.addTarget(self, action: #selector(fetchFreshData(_:)), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching data from Data.gov.sg")
     }
@@ -68,56 +51,71 @@ class ViewController: UIViewController {
     }
     
     private func getMobileDataUsage(numberOfItems : Int, offset: Int){
-        let requestParameter = DataRequest(resource_id: RESOURCEID, limit: numberOfItems, offset: offset)
         lblOfflineContent.text = ""
         refreshControl.isEnabled = true
-        AF.request("https://data.gov.sg/api/action/datastore_search",parameters: requestParameter).responseDecodable(of: MobileDataUsageResponse.self) { (data) in
-            self.refreshControl.endRefreshing()
-            switch data.result {
-            case .success(_):
-                self.txtLbl.text = ""
-                if let response = data.value{
-                    self.populateData(response: response, fromCache: false)
-                }
-                break;
-            case .failure(let error):
-                self.tableView.isHidden = true
-                if let afError = error.asAFError {
-                    switch afError {
-                        case .sessionTaskFailed(let sessionError):
-                            if let urlError = sessionError as? URLError {
-                                switch urlError.code{
-                                    case .notConnectedToInternet:
-                                        self.loadOfflineCache()
-                                        break;
-                                    case .timedOut:
-                                        self.btnRefresh.isHidden = false
-                                        self.txtLbl.text = "Request has timed out. Please try again"
-                                        break;
-                                    default:
-                                        self.txtLbl.text = "Error occured. Error = \(urlError.localizedDescription)"
-                                }
-                        }
-                        default:
-                            self.btnRefresh.isHidden = false
-                            self.txtLbl.text = "Something went wrong. Please try again."
-                    }
-                }
-                
-                break
-
+        do{
+            if try Reachability().connection == .unavailable{
+                loadOfflineCache()
+                self.refreshControl.endRefreshing()
+                return
             }
+        }
+        catch{
+            print(error)
+        }
+        
+        MobileDataAPIClient.requestDataUsage(numberOfItems: numberOfItems, offset: offset,
+                                             completion: {
+            self.refreshControl.endRefreshing()
+        },
+                                             success: { (response) in
+                                                self.populateData(response: response, fromCache: false)
+        },
+                                             fail: { (err) in
+                                                if let afError = err.asAFError {
+                                                    switch afError {
+                                                        case .sessionTaskFailed(let sessionError):
+                                                            if let urlError = sessionError as? URLError {
+                                                                switch urlError.code{
+                                                                    case .notConnectedToInternet:
+                                                                        self.loadOfflineCache()
+                                                                        break;
+                                                                    case .timedOut:
+                                                                        self.toggleShowTableView(false, message: "Request has timed out. Please try again")
+                                                                        break;
+                                                                    default:
+                                                                        self.toggleShowTableView(false, message: "Error occured. Error = \(urlError.localizedDescription)")
+                                                                }
+                                                        }
+                                                        default:
+                                                            self.toggleShowTableView(false, message: "Something went wrong. Please try again.")
+                                                    }
+                                                }
+        })
+       
+    }
+    
+    private func toggleShowTableView(_ showTable: Bool, message: String? = ""){
+        if(showTable){
+            self.txtLbl.text = ""
+            self.btnRefresh.isHidden = true
+            self.tableView.isHidden = false
+        }
+        else{
+            self.tableView.isHidden = true
+            self.btnRefresh.isHidden = false
+            self.txtLbl.text = message
         }
     }
     
     private func populateData(response:MobileDataUsageResponse, fromCache: Bool){
         var success = false
+        self.txtLbl.text = ""
         if let responseSuccess = response.success{
             success = responseSuccess
         }
         if success {
-            self.btnRefresh.isHidden = true
-            self.tableView.isHidden = false
+            toggleShowTableView(true)
             var limit = 0, max = 0
             if let result = response.result, let resultLimit = result.limit, let resultMax = result.total{
                 limit = resultLimit
@@ -125,8 +123,7 @@ class ViewController: UIViewController {
             }
             
             if max == 0{
-                self.btnRefresh.isHidden = false
-                self.txtLbl.text = "No Mobile Usage data is available"
+                toggleShowTableView(false, message: "No Mobile Usage data is available")
             }
             else if limit < max{
                 self.getMobileDataUsage(numberOfItems: max, offset: 0)
@@ -148,32 +145,27 @@ class ViewController: UIViewController {
             }
         }
         else{
-            self.tableView.isHidden = true
-            self.txtLbl.text = "Error retrieving data from Data.gov.sg"
+            toggleShowTableView(false, message: "Error retrieving data from Data.gov.sg")
         }
         
     }
     
     private func loadOfflineCache(){
         if let record = OfflineCacheManager.shared().readJSON(MobileDataUsageResponse.self){
+            toggleShowTableView(true)
             populateData(response: record, fromCache: true)
             refreshControl.isEnabled = false
             lblOfflineContent.text = "Using offline content"
+        }
+        else{
+            toggleShowTableView(false, message: "Internet is unavailable")
         }
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         let imgView = tapGestureRecognizer.view as! UIImageView
-        print("your taped image view tag is : \(imgView.tag)")
         performSegue(withIdentifier: "DisplayDetail", sender: imgView.tag)
-        if (imgView.tag == 0) //Give your image View tag
-        {
-            //navigate to next view
-        }
-        else{
-
-        }
     }
     
     @objc private func fetchFreshData(_ sender: Any) {
