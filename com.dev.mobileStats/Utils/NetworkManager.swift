@@ -7,12 +7,9 @@
 //
 
 import Foundation
-import Alamofire
 class NetworkManager{
+
+
     
     
-    
-    static func request(url: String, parameter: Parameters) -> DataRequest {
-        return AF.request(url, parameters: parameter)
-    }
 }

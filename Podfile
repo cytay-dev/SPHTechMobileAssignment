@@ -8,6 +8,7 @@ target 'com.dev.mobileStats' do
   # Pods for com.dev.mobileStats
   pod 'Alamofire', '~> 5.1'
   pod 'ReachabilitySwift'
+  pod 'Mocker', '~> 2.1' 
 
   target 'com.dev.mobileStatsTests' do
     inherit! :search_paths

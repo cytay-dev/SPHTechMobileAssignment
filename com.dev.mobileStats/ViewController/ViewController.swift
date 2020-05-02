@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnRefresh: UIButton!
     @IBOutlet weak var lblOfflineContent: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private let refreshControl = UIRefreshControl()
     
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        activityIndicator.hidesWhenStopped = true
         initTableConfiguration()
         initRefreshControlConfiguration()
         initStartingLoad()
@@ -52,10 +53,12 @@ class ViewController: UIViewController {
     
     private func getMobileDataUsage(numberOfItems : Int, offset: Int){
         lblOfflineContent.text = ""
+        activityIndicator.startAnimating()
         refreshControl.isEnabled = true
         do{
             if try Reachability().connection == .unavailable{
                 loadOfflineCache()
+                self.activityIndicator.stopAnimating()
                 self.refreshControl.endRefreshing()
                 return
             }
@@ -64,8 +67,9 @@ class ViewController: UIViewController {
             print(error)
         }
         
-        MobileDataAPIClient.requestDataUsage(numberOfItems: numberOfItems, offset: offset,
+        MobileDataAPIClient.shared().requestDataUsage(numberOfItems: numberOfItems, offset: offset,
                                              completion: {
+                                                self.activityIndicator.stopAnimating()
             self.refreshControl.endRefreshing()
         },
                                              success: { (response) in
@@ -96,17 +100,19 @@ class ViewController: UIViewController {
     }
     
     private func toggleShowTableView(_ showTable: Bool, message: String? = ""){
-        if(showTable){
+        if showTable {
             self.txtLbl.text = ""
             self.btnRefresh.isHidden = true
             self.tableView.isHidden = false
         }
-        else{
+        else {
+            self.activityIndicator.stopAnimating()
             self.tableView.isHidden = true
             self.btnRefresh.isHidden = false
             self.txtLbl.text = message
         }
     }
+    
     
     private func populateData(response:MobileDataUsageResponse, fromCache: Bool){
         var success = false

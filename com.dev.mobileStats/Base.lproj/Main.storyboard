@@ -100,6 +100,9 @@
                                     <action selector="refreshData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v4y-wb-SMW"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="qrW-Zz-OHg">
+                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -116,11 +119,14 @@
                             <constraint firstItem="IvP-Tz-YXx" firstAttribute="top" secondItem="TAN-M8-LKB" secondAttribute="bottom" constant="15" id="hAh-X4-xGe"/>
                             <constraint firstItem="UAx-MQ-m7n" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="haj-Up-rgo"/>
                             <constraint firstItem="UAx-MQ-m7n" firstAttribute="top" secondItem="bAq-4x-HYe" secondAttribute="bottom" id="jLZ-7v-kSr"/>
+                            <constraint firstItem="qrW-Zz-OHg" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="sOa-dH-uja"/>
+                            <constraint firstItem="qrW-Zz-OHg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uPZ-0E-IPr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Mobile Data Usage List" id="olZ-vQ-Gcd"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="qrW-Zz-OHg" id="hPC-am-8Ti"/>
                         <outlet property="btnRefresh" destination="IvP-Tz-YXx" id="HaI-OZ-eyG"/>
                         <outlet property="lblOfflineContent" destination="bAq-4x-HYe" id="fHz-4g-nnC"/>
                         <outlet property="tableView" destination="UAx-MQ-m7n" id="MHG-HQ-MYq"/>
@@ -229,7 +235,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2wL-qO-Ogd" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LBC-Ew-hZj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

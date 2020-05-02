@@ -7,28 +7,135 @@
 //
 
 import XCTest
+import Mocker
+
 @testable import com_dev_mobileStats
 
 class com_dev_mobileStatsTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGetDataOnSuccess() throws {
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        
+        let exp = expectation(description: "expecting to get success response")
+
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithData.data])
+        mock.register()
+        
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            XCTAssertEqual(response.result?.records?.count, 5)
+            exp.fulfill()
+        }, fail: { (err) in
+            XCTFail("Should not fail on success")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testWhenHitInternalServerError() throws {
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        
+        let exp = expectation(description: "expecting to get failure response")
+
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 500, data: [.get : Data()])
+        mock.register()
+        
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            XCTFail("Should not fail on success")
+            exp.fulfill()
+        }, fail: { (err) in
+            XCTAssertNotNil(err)
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    func testWhenTimeout() throws {
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        
+        let exp = expectation(description: "expecting to get timed out response")
+        
+        var mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithData.data])
+        mock.delay = DispatchTimeInterval.seconds(300) //5mins
+        mock.register()
+        
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            XCTFail("Should not fail on success")
+            exp.fulfill()
+        }, fail: { (err) in
+            if let afError = err.asAFError {
+                switch afError {
+                case .sessionTaskFailed(let sessionError):
+                    if let urlError = sessionError as? URLError {
+                            XCTAssertEqual(urlError.code, URLError.timedOut)
+                        }
+                    else{
+                        XCTFail("Not the expected error")
+                    }
+                default:
+                    XCTFail("Not the expected error")
+                }
+                
+            }
+            else {
+               XCTFail("Not the expected error")
+            }
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 400.0, handler: nil)
+    }
+    
+    func testWhenSuccessButNoData() throws {
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        
+        let exp = expectation(description: "expecting to get timed out response")
+       
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithNoData.data])
+        mock.register()
+        
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            XCTAssertEqual(response.result?.records?.count, 0)
+            exp.fulfill()
+        }, fail: { (err) in
+            XCTFail("Not supposed to fail")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+    
+    func testWhenHit404Error() throws {
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        
+        let exp = expectation(description: "expecting to get failure response")
+
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 404, data: [.get : Data()])
+        mock.register()
+        
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            XCTFail("Should not fail on success")
+            exp.fulfill()
+        }, fail: { (err) in
+            XCTAssertNotNil(err)
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
     }
 
 }

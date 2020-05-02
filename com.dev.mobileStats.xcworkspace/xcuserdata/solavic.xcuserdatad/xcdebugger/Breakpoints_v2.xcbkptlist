@@ -52,5 +52,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D66840AD-A712-4CF5-B936-76CFC22401D7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "com.dev.mobileStats/Utils/MobileDataAPIClient.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "requestDataUsage(numberOfItems:offset:completion:success:fail:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D66840AD-A712-4CF5-B936-76CFC22401D7 - cd4cb215a03c05fc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;com_dev_mobileStats.MobileDataUsageResponse, Alamofire.AFError&gt;) -&gt; () in com_dev_mobileStats.MobileDataAPIClient.requestDataUsage(numberOfItems: Swift.Int, offset: Swift.Int, completion: () -&gt; (), success: (com_dev_mobileStats.MobileDataUsageResponse) -&gt; (), fail: (Swift.Error) -&gt; ()) -&gt; ()"
+                  moduleName = "com.dev.mobileStats"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Samsung_T5/Code/GItHubProjects/SPHTechMobileAssignment/com.dev.mobileStats/Utils/MobileDataAPIClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "2051">
+               </Location>
+               <Location
+                  uuid = "D66840AD-A712-4CF5-B936-76CFC22401D7 - 6c79b79334f42f3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;com_dev_mobileStatsTests.MobileDataUsageResponse, Alamofire.AFError&gt;) -&gt; () in com_dev_mobileStatsTests.MobileDataAPIClient.requestDataUsage(numberOfItems: Swift.Int, offset: Swift.Int, completion: () -&gt; (), success: (com_dev_mobileStatsTests.MobileDataUsageResponse) -&gt; (), fail: (Swift.Error) -&gt; ()) -&gt; ()"
+                  moduleName = "com.dev.mobileStatsTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Samsung_T5/Code/GItHubProjects/SPHTechMobileAssignment/com.dev.mobileStats/Utils/MobileDataAPIClient.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "2051">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB1074BE-11FF-44E0-AC80-6F6D5EA474F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "com.dev.mobileStatsTests/com_dev_mobileStatsTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "testWhenSuccessButNoData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

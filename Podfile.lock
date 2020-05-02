@@ -1,20 +1,24 @@
 PODS:
   - Alamofire (5.1.0)
+  - Mocker (2.1.0)
   - ReachabilitySwift (5.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.1)
+  - Mocker (~> 2.1)
   - ReachabilitySwift
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Mocker
     - ReachabilitySwift
 
 SPEC CHECKSUMS:
   Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Mocker: 55f3d932b93e1568f3cf15bd697348c06fc676ee
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
 
-PODFILE CHECKSUM: 958711ad60f4928b6c0208dd89810c99cbe9e9b5
+PODFILE CHECKSUM: 896db27795aa95f2ed594821fc77f5cd8a14c684
 
 COCOAPODS: 1.9.1
