@@ -9,6 +9,9 @@
 import Foundation
 
 // MARK: - MobileDataUsageResponse
+/**
+ Codeable structs that minic the structure and design of response from Data.gov.sg
+ */
 struct MobileDataUsageResponse: Codable {
     let help: String?
     let success: Bool?

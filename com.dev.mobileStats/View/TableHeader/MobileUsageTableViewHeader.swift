@@ -8,9 +8,12 @@
 
 import UIKit
 
+///Custom View class for rendering table view header for `ViewController`
 class MobileUsageTableViewHeader: UIView {
-
+    // MARK: - IBOutlets
     @IBOutlet var contentView: UIView!
+    
+    // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()

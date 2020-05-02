@@ -46,8 +46,8 @@
             filePath = "com.dev.mobileStats/Model/MobileUsageData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "initRecords()"
             landmarkType = "7">
          </BreakpointContent>
@@ -112,7 +112,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
             endingLineNumber = "105"
-            landmarkName = "testNavigateRowWithDecreaseInVolume()"
+            landmarkName = "testWhenSuccessButNoData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

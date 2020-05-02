@@ -8,12 +8,20 @@
 
 import UIKit
 
+/**
+ ViewController to show breakdown information of yearly mobile data usage information
+ */
 class DetailViewController: UIViewController {
+    // MARK: - IBOutlets
     @IBOutlet weak var lblPeriod: UILabel!
     @IBOutlet weak var lblVolume: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Variables
     var data : MobileUsageData.UsageData = MobileUsageData.UsageData(usage: 0, records: [Int : Double]())
     var year: String = ""
+    
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -24,20 +32,9 @@ class DetailViewController: UIViewController {
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
+// MARK: - UITableViewDataSource
 extension DetailViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.records.count
@@ -60,6 +57,7 @@ extension DetailViewController : UITableViewDataSource{
     }
 }
 
+// MARK: - UITableViewDelegate
 extension DetailViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         let view = MobileUsageTableViewHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 51))

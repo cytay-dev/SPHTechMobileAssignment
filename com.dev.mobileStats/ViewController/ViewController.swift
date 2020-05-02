@@ -10,37 +10,37 @@ import UIKit
 import Alamofire
 import Reachability
 
+/**
+ Main viewcontroller to show listing of mobile data usage information in overview
+ */
 class ViewController: UIViewController {
+    // MARK: - IBOutlets
     @IBOutlet weak var txtLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var btnRefresh: UIButton!
     @IBOutlet weak var lblOfflineContent: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    // MARK: - UI Controls
     private let refreshControl = UIRefreshControl()
     
+    // MARK: - Variables
     var mobileUsageData = MobileUsageData()
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        activityIndicator.hidesWhenStopped = true
-        initTableConfiguration()
-        initRefreshControlConfiguration()
-        initStartingLoad()
-    }
-    
+    // MARK: - Initialization
+    ///Startng call to call service to begin loading data for display
     private func initStartingLoad(){
         getMobileDataUsage(numberOfItems: 1,offset: 0)
     }
     
+    ///Initialize UI and control configuration for `refreshControl`
     private func initRefreshControlConfiguration(){
         refreshControl.isEnabled = true
         refreshControl.addTarget(self, action: #selector(fetchFreshData(_:)), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching data from Data.gov.sg")
     }
     
+    ///Initialize UI and control configuration for `tableView`
     private func initTableConfiguration(){
         tableView.refreshControl = refreshControl
         tableView.allowsSelection = false
@@ -51,6 +51,22 @@ class ViewController: UIViewController {
         tableView.tableFooterView = UIView()
     }
     
+    // MARK: - Functions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        activityIndicator.hidesWhenStopped = true
+        initTableConfiguration()
+        initRefreshControlConfiguration()
+        initStartingLoad()
+    }
+    
+    /**
+     Fetch data from Mobile Data API client or read from cache if no network is available
+        - Parameters:
+            - numberOfItems: The number of item to get per request
+            - offset: Number of item to skip starting from 0
+     */
     private func getMobileDataUsage(numberOfItems : Int, offset: Int){
         lblOfflineContent.text = ""
         activityIndicator.startAnimating()
@@ -99,6 +115,12 @@ class ViewController: UIViewController {
        
     }
     
+    /**
+     Update tableView and its relevant UIs based on its visibility state
+     - Parameters:
+        - showTable: Boolean flag to determine show or hide `tableView` and `btnRefresh`
+        - message: Text for showing error message to inform user when negative scenarios occurs
+     */
     private func toggleShowTableView(_ showTable: Bool, message: String? = ""){
         if showTable {
             self.txtLbl.text = ""
@@ -113,8 +135,14 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    private func populateData(response:MobileDataUsageResponse, fromCache: Bool){
+    /**
+     Populate `tableView` with data retrieved either from service, mock or cache
+     - Parameters:
+        - response: List of raw records to received from Data.gov.sg on mobile data usage
+        - fromCache: Boolean flag to determine if response is from cache or actual service call.
+     - Important:when fromCache is **true**, it will determine that the current set of data need to be stored in cache for offline usage
+     */
+    private func populateData(response: MobileDataUsageResponse, fromCache: Bool){
         var success = false
         self.txtLbl.text = ""
         if let responseSuccess = response.success{
@@ -156,6 +184,7 @@ class ViewController: UIViewController {
         
     }
     
+    ///Load content from offline cache and update necessary UIs
     private func loadOfflineCache(){
         if let record = OfflineCacheManager.shared().readJSON(MobileDataUsageResponse.self){
             toggleShowTableView(true)
@@ -168,6 +197,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // MARK: - Action Handlers
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         let imgView = tapGestureRecognizer.view as! UIImageView
@@ -203,6 +233,7 @@ class ViewController: UIViewController {
     
 }
 
+// MARK: - UITableViewDataSource
 extension ViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mobileUsageData.count
@@ -232,6 +263,7 @@ extension ViewController : UITableViewDataSource{
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         let view = MobileUsageTableViewHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 51))

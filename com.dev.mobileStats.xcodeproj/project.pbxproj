@@ -35,8 +35,6 @@
 		3EB09BDE245C551F003A87E1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB09BDD245C551F003A87E1 /* DetailViewController.swift */; };
 		3EB09BDF245C551F003A87E1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB09BDD245C551F003A87E1 /* DetailViewController.swift */; };
 		3EB09BE2245C88B8003A87E1 /* OfflineCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB09BE1245C88B8003A87E1 /* OfflineCacheManager.swift */; };
-		3ECB0482245D6F13004708D9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB0481245D6F13004708D9 /* NetworkManager.swift */; };
-		3ECB0483245D6F13004708D9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB0481245D6F13004708D9 /* NetworkManager.swift */; };
 		3ECB0486245D8755004708D9 /* response-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB0485245D8755004708D9 /* response-success.json */; };
 		3ECB0487245D8755004708D9 /* response-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB0485245D8755004708D9 /* response-success.json */; };
 		3ECB0499245D992E004708D9 /* Pods_com_dev_mobileStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECB0498245D992E004708D9 /* Pods_com_dev_mobileStats.framework */; };
@@ -90,7 +88,6 @@
 		3EB09BD9245BD203003A87E1 /* MobileUsageTableViewHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MobileUsageTableViewHeader.xib; sourceTree = "<group>"; };
 		3EB09BDD245C551F003A87E1 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3EB09BE1245C88B8003A87E1 /* OfflineCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineCacheManager.swift; sourceTree = "<group>"; };
-		3ECB0481245D6F13004708D9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3ECB0485245D8755004708D9 /* response-success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-success.json"; sourceTree = "<group>"; };
 		3ECB048A245D96CA004708D9 /* Mocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Mocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ECB048E245D9897004708D9 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,12 +246,8 @@
 		3EB09BE0245C8860003A87E1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3ECB04B6245DC476004708D9 /* Networking */,
 				3EB09BE1245C88B8003A87E1 /* OfflineCacheManager.swift */,
-				3E63A478245D4A8E00B75277 /* MobileDataAPIClient.swift */,
-				3E63A47B245D531F00B75277 /* NetworkRequestHandler.swift */,
-				3E63A47E245D5E8800B75277 /* MockRequestHandler.swift */,
-				3E63A481245D5F2300B75277 /* APIClient.swift */,
-				3ECB0481245D6F13004708D9 /* NetworkManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -262,8 +255,7 @@
 		3ECB0484245D8702004708D9 /* MockData */ = {
 			isa = PBXGroup;
 			children = (
-				3ECB0485245D8755004708D9 /* response-success.json */,
-				3ECB049C245DA4C6004708D9 /* response-empty-success.json */,
+				3ECB04B8245DC4BB004708D9 /* JSON */,
 				3ECB049E245DA6BB004708D9 /* MockData.swift */,
 			);
 			path = MockData;
@@ -282,11 +274,55 @@
 		3ECB04AE245DB0E3004708D9 /* MockData */ = {
 			isa = PBXGroup;
 			children = (
-				3ECB04AF245DB112004708D9 /* response-mock-UI.json */,
+				3ECB04B9245DC4C6004708D9 /* JSON */,
 				3ECB04B1245DB232004708D9 /* MockedData.swift */,
-				3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */,
 			);
 			path = MockData;
+			sourceTree = "<group>";
+		};
+		3ECB04B5245DC45C004708D9 /* RequestHandler */ = {
+			isa = PBXGroup;
+			children = (
+				3E63A47B245D531F00B75277 /* NetworkRequestHandler.swift */,
+				3E63A47E245D5E8800B75277 /* MockRequestHandler.swift */,
+			);
+			path = RequestHandler;
+			sourceTree = "<group>";
+		};
+		3ECB04B6245DC476004708D9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3ECB04B7245DC497004708D9 /* Protocol */,
+				3E63A478245D4A8E00B75277 /* MobileDataAPIClient.swift */,
+				3ECB04B5245DC45C004708D9 /* RequestHandler */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		3ECB04B7245DC497004708D9 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3E63A481245D5F2300B75277 /* APIClient.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3ECB04B8245DC4BB004708D9 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				3ECB0485245D8755004708D9 /* response-success.json */,
+				3ECB049C245DA4C6004708D9 /* response-empty-success.json */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		3ECB04B9245DC4C6004708D9 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */,
+				3ECB04AF245DB112004708D9 /* response-mock-UI.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		C6DD98E37DEFFCA873B67608 /* Pods */ = {
@@ -515,7 +551,6 @@
 				3E63A479245D4A8E00B75277 /* MobileDataAPIClient.swift in Sources */,
 				3E18436C245B22EF001D40DD /* MobileUsageTableViewCell.swift in Sources */,
 				3E63A482245D5F2300B75277 /* APIClient.swift in Sources */,
-				3ECB0482245D6F13004708D9 /* NetworkManager.swift in Sources */,
 				3EAD10AC245AA36000EEEB40 /* SceneDelegate.swift in Sources */,
 				3EB09BD7245BD1E5003A87E1 /* MobileUsageTableViewHeader.swift in Sources */,
 				3EB09BDE245C551F003A87E1 /* DetailViewController.swift in Sources */,
@@ -531,7 +566,6 @@
 				3E18436D245B22EF001D40DD /* MobileUsageTableViewCell.swift in Sources */,
 				3E63A47A245D4A8E00B75277 /* MobileDataAPIClient.swift in Sources */,
 				3E63A483245D5F2300B75277 /* APIClient.swift in Sources */,
-				3ECB0483245D6F13004708D9 /* NetworkManager.swift in Sources */,
 				3E63A480245D5E8800B75277 /* MockRequestHandler.swift in Sources */,
 				3EB09BD8245BD1E5003A87E1 /* MobileUsageTableViewHeader.swift in Sources */,
 				3E63A47D245D531F00B75277 /* NetworkRequestHandler.swift in Sources */,

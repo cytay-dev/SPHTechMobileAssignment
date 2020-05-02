@@ -8,13 +8,22 @@
 
 import Foundation
 
+/**
+ Enum for determing how to organize the records for use in class `MobileUsageData`
+ */
 enum RecordReportFormat{
     case Year
     case Default
 }
 
+/**
+ Data structure to hold result received from Data.gov.sg for mobile data usage information
+ */
 class MobileUsageData{
-    
+    // MARK: - Variables
+    /**
+     Data structure to hold the total volume for the year and hold additional information for how the total volume is derived and flag to determine if the year has any decrease of volume throughout the quarters
+     */
     struct UsageData{
         var usage: Double
         var records: [Int:Double]{
@@ -39,11 +48,15 @@ class MobileUsageData{
         var keys: [Int] = [Int]()
     }
     
-    
+    ///Variables for filtering the data to be used
     private var minYearFilter = 0
     private var maxYearFilter = 0
+    
+    ///Use for controlling the order and index of item to be returned
     private var keys = [Int]()
+    ///Hold unprocessed data retrieved from rest api
     private var raw_records = [Record]()
+    ///Hold filtered and processed data
     private var records_InUse: [Int:UsageData] {
         didSet{
             keys = Array(records_InUse.keys)
@@ -51,26 +64,25 @@ class MobileUsageData{
         }
     }
   
+    ///Hold unfiltered processed data
     private var records : [Int:UsageData] {
         didSet{
             configureRecordsForUse()
         }
     }
-    
+    ///Hold the format of the data is organized in
     private var format: RecordReportFormat {
         didSet{
             initRecords()
         }
     }
-    
-    private func OrganizeRecords(){}
-    
+    ///Return the count of the filtered and processed data
     public var count : Int{
         get{
             return records_InUse.count
         }
     }
-    
+    // MARK: - Initialization
     init(){
         self.raw_records = [Record]()
         self.records = [Int:UsageData]()
@@ -95,13 +107,26 @@ class MobileUsageData{
         initRecords()
     }
     
+    // MARK: - Functions
+    ///Determine the range of years the records to be returned
     func setFilter(minYear: Int, maxYear: Int){
         minYearFilter = minYear
         maxYearFilter = maxYear
         configureRecordsForUse()
         
     }
-    
+    ///Get record by the index they are sorted in ascending
+    func get(_ index: Int) -> (year: Int, data: UsageData?){
+        if(!records_InUse.isEmpty && index < records_InUse.count){
+            let key = keys[index]
+            return (key, records_InUse[key])
+        }
+        else{
+            return (0,nil)
+        }
+    }
+    // MARK: - Private Functions
+    ///Filter the processed data
     private func configureRecordsForUse(){
         if(format == .Year){
             if minYearFilter != 0 && maxYearFilter != 0{
@@ -116,6 +141,7 @@ class MobileUsageData{
         }
     }
     
+    ///Process the raw records
     private func initRecords(){
         switch format {
 
@@ -143,16 +169,6 @@ class MobileUsageData{
                 }
             }
             break;
-        }
-    }
-    
-    func get(_ index: Int) -> (year: Int, data: UsageData?){
-        if(!records_InUse.isEmpty && index < records_InUse.count){
-            let key = keys[index]
-            return (key, records_InUse[key])
-        }
-        else{
-            return (0,nil)
         }
     }
     

@@ -8,14 +8,12 @@
 
 import Foundation
 import Alamofire
+/**
+ API Client class to access Data.gov.sg to get mobile data usage information
+ */
 class MobileDataAPIClient : APIClient{
     
-    
-    private let RESOURCE_ID = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
-    public static let MOBILE_DATA_API_URL = "https://data.gov.sg/api/action/datastore_search"
-    private let mobileApiUrl = MobileDataAPIClient.MOBILE_DATA_API_URL
-    private var requestHandler: RequestHandler
-    
+    ///Request structure to send to Data.gov.sg for request
     struct MobileDataRequest : Encodable{
         let resourceId : String
         let limit : Int
@@ -28,6 +26,11 @@ class MobileDataAPIClient : APIClient{
             ]
         }
     }
+    // MARK: - Variables
+    private let RESOURCE_ID = "a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
+    public static let MOBILE_DATA_API_URL = "https://data.gov.sg/api/action/datastore_search"
+    private let mobileApiUrl = MobileDataAPIClient.MOBILE_DATA_API_URL
+    private var requestHandler: RequestHandler
     
     private static var sharedAPIClient: MobileDataAPIClient = {
         if ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
@@ -50,19 +53,37 @@ class MobileDataAPIClient : APIClient{
         return mgr
     }()
     
-    
+    // MARK: - Functions
+    /**
+     Instance for accessing api client.
+     - Important: Supported for use in **debug**, **release** and **UI Testing** build
+     */
     class func shared() -> MobileDataAPIClient {
         return sharedAPIClient
     }
     
+    /**
+    Instance for accessing api client.
+    - Important: Supported for use in **release** build only
+    */
     class func production() -> MobileDataAPIClient {
         return productionAPIClient
     }
     
+    /**
+    Mock instance for accessing api client.
+    - Important: Supported for use in **debug** and **UI Testing** build only
+    */
     class func mock() -> MobileDataAPIClient {
         return mockAPIClient
     }
     
+    // MARK: - Initialization
+    /**
+        Initialize `MobileDataAPIClient` for use.
+        - Parameters:
+            - environment: The environment the api cilent is to be initialized for
+     */
     init(environment: APIEnvironment){
         switch environment {
         case .production:
@@ -76,6 +97,16 @@ class MobileDataAPIClient : APIClient{
         }
     }
     
+    // MARK: - Functions
+    /**
+        GET request invoked to Data.gov.sg for retrieving mobile data usage information
+        - Parameters:
+            - numberOfItems: The number of item to get per request
+            - offset: Number of item to skip starting from 0
+            - completion: Callback to be executed regardless of success or failure of call but executed before success callback or fail callback is triggered
+            - success: Callback to be executed on success block of network call
+            - fail: Callback to be executed on the failure block of the network call
+     */
     func requestDataUsage(numberOfItems : Int, offset: Int,completion:@escaping ()->Void, success:@escaping (_ result: MobileDataUsageResponse)->Void, fail:@escaping (_ error: Error)->Void){
         let requestParameter = MobileDataRequest(resourceId: RESOURCE_ID, limit: numberOfItems, offset: offset)
         requestHandler.request(url: mobileApiUrl, parameter: requestParameter.parametersRepresentation).validate(statusCode: 200..<300).responseDecodable(of: MobileDataUsageResponse.self) { (data) in

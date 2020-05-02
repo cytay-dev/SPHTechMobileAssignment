@@ -9,7 +9,13 @@
 import Foundation
 import Alamofire
 import Mocker
+
+/**
+Mock Network request handler that fake service request to API servers and return dummy data
+*/
 class MockRequestHandler: RequestHandler{
+    // MARK: - Variables
+    ///Mock service session manager using `Mocker` framework
     private lazy var sessionManager: Session = {
       let configuration = URLSessionConfiguration.af.default
       configuration.protocolClasses = [MockingURLProtocol.self] + (configuration.protocolClasses ?? [])
@@ -17,10 +23,7 @@ class MockRequestHandler: RequestHandler{
         return sessionManager
     }()
     
-    func request(url: String, parameter: Parameters) -> DataRequest {
-        return sessionManager.request(url,parameters: parameter)
-    }
-    
+    // MARK: - Initialization
     init(){
         //Setup mock if is for UI Testing
         if ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
@@ -49,4 +52,17 @@ class MockRequestHandler: RequestHandler{
             }
         }
     }
+    
+    // MARK: - Functions
+    /**
+    Make request ot API server using given url and parameters
+    - Parameters:
+       -   url: Url of the service
+       - parameter: Parameters to be included in the query string of the url
+    */
+    func request(url: String, parameter: Parameters) -> DataRequest {
+        return sessionManager.request(url,parameters: parameter)
+    }
+    
+    
 }
