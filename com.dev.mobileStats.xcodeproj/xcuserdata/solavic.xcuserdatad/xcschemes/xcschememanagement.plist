@@ -7,7 +7,25 @@
 		<key>com.dev.mobileStats.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>3EAD10A5245AA36000EEEB40</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EAD10BB245AA36200EEEB40</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3ECB04A3245DA984004708D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

@@ -21,6 +21,7 @@ class com_dev_mobileStatsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    ///Test if data is correct when there is data
     func testGetDataOnSuccess() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
         let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
@@ -41,6 +42,7 @@ class com_dev_mobileStatsTests: XCTestCase {
         waitForExpectations(timeout: 10.0, handler: nil)
     }
 
+    ///Test if there is error when http status 500 is returned
     func testWhenHitInternalServerError() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
         let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
@@ -61,6 +63,7 @@ class com_dev_mobileStatsTests: XCTestCase {
         waitForExpectations(timeout: 10.0, handler: nil)
     }
     
+    ///Test if there is correct timeout error when timeout occured
     func testWhenTimeout() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
         let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
@@ -98,6 +101,7 @@ class com_dev_mobileStatsTests: XCTestCase {
         waitForExpectations(timeout: 400.0, handler: nil)
     }
     
+    ///Test if there is no data when no data is returned
     func testWhenSuccessButNoData() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
         let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
@@ -118,6 +122,7 @@ class com_dev_mobileStatsTests: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
     }
     
+    ///Test if there is error when http status 404 is returned
     func testWhenHit404Error() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
         let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!

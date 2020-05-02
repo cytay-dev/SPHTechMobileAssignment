@@ -24,11 +24,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testNavigable() throws{
-      //  let app = XCUIApplication()
-      //  app.launch()
-        
-    }
+    ///Test if table is correct when populated with data
     func testDataShowing() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -39,6 +35,8 @@ class com_dev_mobileStatsUITests: XCTestCase {
         let count = tablesQuery.cells.count
         XCTAssertEqual(count, 3)
     }
+    
+    ///Test if table is empty when there is no data
     func testNoDataMessage() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -50,6 +48,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         XCTAssertEqual("No Mobile Usage data is available", lbl.label)
     }
     
+    ///Test if is there is no image when the row with data that has no decrease in volume in its quarters
     func testRowWithoutDecreaseHasNoImage() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -61,7 +60,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         XCTAssertNotNil(firstRow)
         XCTAssertFalse(firstRow.images["warning"].exists)
     }
-    
+    ///Test if there is image when there is a row with data that has decrease in volume in its quarters
     func testLastRowHasDecreaseInVolume() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -75,6 +74,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         XCTAssertTrue(lastRow.images["warning"].exists)
     }
     
+    ///Test if it can be navigated when there is a row with data that has decrease in volume in its quarters
     func testRowWithDecreaseCanBeNavigated() throws{
         func testLastRowHasDecreaseInVolume() throws{
             let app = XCUIApplication()
@@ -91,6 +91,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         }
     }
     
+    ///Test if is navigated when there is a row with data that has decrease in volume in its quarters
     func testNavigateRowWithDecreaseInVolume() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -105,6 +106,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
 
     }
     
+    ///Test when 500 status is returned from network call
     func testInternalErrorMessage() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -117,6 +119,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         XCTAssertEqual("Something went wrong. Please try again.", lbl.label)
     }
     
+    ///Test when timeout is returned from network call
     func testTimeOutErrorMessage() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -128,6 +131,7 @@ class com_dev_mobileStatsUITests: XCTestCase {
         XCTAssertTrue(lbl.waitForExistence(timeout: 400))
     }
     
+    ///Test when 404 status is returned from network call
     func test404ErrorMessage() throws{
         let app = XCUIApplication()
         app.launchArguments += ["UI-TESTING"]
@@ -138,48 +142,6 @@ class com_dev_mobileStatsUITests: XCTestCase {
         let lbl = app.staticTexts["Something went wrong. Please try again."]
         XCTAssertNotNil(lbl)
         XCTAssertEqual("Something went wrong. Please try again.", lbl.label)
-    }
-    
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-                        let app = XCUIApplication()
-        
-   //     app.launchArguments += ["UI-TESTING"]
-    //            app.launchEnvironment["MockData"] = MockedData.response.string
-        
-    //    let app = XCUIApplication()
-    //    app.staticTexts["No Mobile Usage data is available"].tap()
-    //    app/*@START_MENU_TOKEN@*/.staticTexts["Click to refresh"]/*[[".buttons[\"Click to refresh\"].staticTexts[\"Click to refresh\"]",".staticTexts[\"Click to refresh\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-                          app.launch()
-    /*    let app = XCUIApplication()
-        app.navigationBars["2013"].buttons["Mobile Data Usage List"].tap()
-        
-        let tablesQuery = app.tables
-        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["11.453192000000001"]/*[[".cells.staticTexts[\"11.453192000000001\"]",".staticTexts[\"11.453192000000001\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"2011")/*[[".cells.containing(.staticText, identifier:\"14.638703\")",".cells.containing(.staticText, identifier:\"2011\")"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.images["warning"].tap()
-        
-        let navigationBar = app.navigationBars["2011"]
-        navigationBar.staticTexts["2011"].tap()
-        navigationBar.buttons["Mobile Data Usage List"].tap()
-        
-        
-        let app = XCUIApplication()
-        let tablesQuery = app.tables
-        let staticText = tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["11.453192000000001"]/*[[".cells.staticTexts[\"11.453192000000001\"]",".staticTexts[\"11.453192000000001\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-        staticText.tap()
-        staticText.tap()
-        tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"2011")/*[[".cells.containing(.staticText, identifier:\"14.638703\")",".cells.containing(.staticText, identifier:\"2011\")"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.images["warning"].tap()
-        app.navigationBars["2011"].buttons["Mobile Data Usage List"].tap()
-        tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"2013")/*[[".cells.containing(.staticText, identifier:\"28.496851999999997\")",".cells.containing(.staticText, identifier:\"2013\")"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.images["warning"].tap()
-        let app = XCUIApplication()
-        let tablesQuery = app.tables
-        tablesQuery/*@START_MENU_TOKEN@*/.cells.containing(.staticText, identifier:"2011")/*[[".cells.containing(.staticText, identifier:\"14.638703\")",".cells.containing(.staticText, identifier:\"2011\")"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.images["warning"].tap()
-        app.navigationBars["2011"].buttons["Mobile Data Usage List"].tap()
-        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["6.228985000000001"]/*[[".cells.staticTexts[\"6.228985000000001\"]",".staticTexts[\"6.228985000000001\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["1.543719"]/*[[".cells.staticTexts[\"1.543719\"]",".staticTexts[\"1.543719\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeDown()
-        XCUIApplication().tables/*@START_MENU_TOKEN@*/.staticTexts["6.228985000000001"]/*[[".cells.staticTexts[\"6.228985000000001\"]",".staticTexts[\"6.228985000000001\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()*/
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
 }
