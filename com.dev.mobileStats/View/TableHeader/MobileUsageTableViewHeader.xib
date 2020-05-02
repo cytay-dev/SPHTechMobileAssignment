@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MobileUsageTableViewHeader" customModule="com_dev_mobileStats" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="zDf-lq-SQ2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Period" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qct-7U-H2E">
+                    <rect key="frame" x="25" y="3.5" width="80" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="H89-1V-klb"/>
+                        <constraint firstAttribute="width" constant="80" id="duL-4O-EkC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume Of Mobile Data (Petabytes)" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIF-2D-Kwf">
+                    <rect key="frame" x="150" y="3.5" width="150" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="KXV-Vm-W4D"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="cKp-5v-QxN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWZ-ip-Dor">
+                    <rect key="frame" x="0.0" y="50" width="320" height="1"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="DFt-t2-h3c"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VIF-2D-Kwf" secondAttribute="trailing" constant="5" id="2Ws-A6-K9m"/>
+                <constraint firstItem="VIF-2D-Kwf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="F6W-iX-KbL"/>
+                <constraint firstItem="YWZ-ip-Dor" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fkc-Og-9m1"/>
+                <constraint firstAttribute="bottom" secondItem="YWZ-ip-Dor" secondAttribute="bottom" id="JmR-8p-X72"/>
+                <constraint firstItem="VIF-2D-Kwf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="NqX-iX-S38"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VIF-2D-Kwf" secondAttribute="bottom" constant="3" id="Tnm-P0-FJ4"/>
+                <constraint firstItem="Qct-7U-H2E" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="lqm-3f-PE6"/>
+                <constraint firstAttribute="trailing" secondItem="YWZ-ip-Dor" secondAttribute="trailing" id="pFf-MT-cT8"/>
+                <constraint firstItem="VIF-2D-Kwf" firstAttribute="leading" secondItem="Qct-7U-H2E" secondAttribute="trailing" constant="45" id="vKv-Li-pEZ"/>
+                <constraint firstItem="Qct-7U-H2E" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="xaR-Na-n9x"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="131.25" y="382.5"/>
+        </view>
+    </objects>
+</document>
