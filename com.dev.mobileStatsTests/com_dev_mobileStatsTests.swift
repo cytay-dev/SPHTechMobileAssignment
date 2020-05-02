@@ -23,7 +23,7 @@ class com_dev_mobileStatsTests: XCTestCase {
 
     func testGetDataOnSuccess() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
-        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
         
         let exp = expectation(description: "expecting to get success response")
 
@@ -43,7 +43,7 @@ class com_dev_mobileStatsTests: XCTestCase {
 
     func testWhenHitInternalServerError() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
-        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
         
         let exp = expectation(description: "expecting to get failure response")
 
@@ -63,7 +63,7 @@ class com_dev_mobileStatsTests: XCTestCase {
     
     func testWhenTimeout() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
-        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
         
         let exp = expectation(description: "expecting to get timed out response")
         
@@ -100,7 +100,7 @@ class com_dev_mobileStatsTests: XCTestCase {
     
     func testWhenSuccessButNoData() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
-        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
         
         let exp = expectation(description: "expecting to get timed out response")
        
@@ -120,7 +120,7 @@ class com_dev_mobileStatsTests: XCTestCase {
     
     func testWhenHit404Error() throws {
         let mockServiceApiClient = MobileDataAPIClient.mock()
-        let originalURL = URL(string: mockServiceApiClient.MOBILE_DATA_API_URL)!
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
         
         let exp = expectation(description: "expecting to get failure response")
 

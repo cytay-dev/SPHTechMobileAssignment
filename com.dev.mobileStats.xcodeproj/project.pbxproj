@@ -42,11 +42,22 @@
 		3ECB0499245D992E004708D9 /* Pods_com_dev_mobileStats.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ECB0498245D992E004708D9 /* Pods_com_dev_mobileStats.framework */; };
 		3ECB049D245DA4C6004708D9 /* response-empty-success.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB049C245DA4C6004708D9 /* response-empty-success.json */; };
 		3ECB049F245DA6BB004708D9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB049E245DA6BB004708D9 /* MockData.swift */; };
+		3ECB04A7245DA984004708D9 /* com_dev_mobileStatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB04A6245DA984004708D9 /* com_dev_mobileStatsUITests.swift */; };
+		3ECB04B0245DB112004708D9 /* response-mock-UI.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB04AF245DB112004708D9 /* response-mock-UI.json */; };
+		3ECB04B2245DB232004708D9 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB04B1245DB232004708D9 /* MockedData.swift */; };
+		3ECB04B4245DB5AF004708D9 /* response-empty-mock-UI.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */; };
 		F1ED9B91144BF584C473AC8D /* Pods_com_dev_mobileStatsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3C14EFB9EDB7E14DE729D8 /* Pods_com_dev_mobileStatsTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		3EAD10BD245AA36200EEEB40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EAD109E245AA36000EEEB40 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EAD10A5245AA36000EEEB40;
+			remoteInfo = com.dev.mobileStats;
+		};
+		3ECB04A9245DA984004708D9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EAD109E245AA36000EEEB40 /* Project object */;
 			proxyType = 1;
@@ -88,6 +99,12 @@
 		3ECB0498245D992E004708D9 /* Pods_com_dev_mobileStats.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_com_dev_mobileStats.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ECB049C245DA4C6004708D9 /* response-empty-success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-empty-success.json"; sourceTree = "<group>"; };
 		3ECB049E245DA6BB004708D9 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		3ECB04A4245DA984004708D9 /* com.dev.mobileStatsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.dev.mobileStatsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ECB04A6245DA984004708D9 /* com_dev_mobileStatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = com_dev_mobileStatsUITests.swift; sourceTree = "<group>"; };
+		3ECB04A8245DA984004708D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3ECB04AF245DB112004708D9 /* response-mock-UI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-mock-UI.json"; sourceTree = "<group>"; };
+		3ECB04B1245DB232004708D9 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
+		3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-empty-mock-UI.json"; sourceTree = "<group>"; };
 		41A8C8934D20D248F8C4EB9E /* Pods-com.dev.mobileStats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.dev.mobileStats.debug.xcconfig"; path = "Target Support Files/Pods-com.dev.mobileStats/Pods-com.dev.mobileStats.debug.xcconfig"; sourceTree = "<group>"; };
 		451E2634112EEC16C1B83479 /* Pods-com.dev.mobileStatsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.dev.mobileStatsTests.release.xcconfig"; path = "Target Support Files/Pods-com.dev.mobileStatsTests/Pods-com.dev.mobileStatsTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0CE0F2BE8920764FDDE1816 /* Pods-com.dev.mobileStats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.dev.mobileStats.release.xcconfig"; path = "Target Support Files/Pods-com.dev.mobileStats/Pods-com.dev.mobileStats.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +126,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1ED9B91144BF584C473AC8D /* Pods_com_dev_mobileStatsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3ECB04A1245DA984004708D9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +184,7 @@
 			children = (
 				3EAD10A8245AA36000EEEB40 /* com.dev.mobileStats */,
 				3EAD10BF245AA36200EEEB40 /* com.dev.mobileStatsTests */,
+				3ECB04A5245DA984004708D9 /* com.dev.mobileStatsUITests */,
 				3EAD10A7245AA36000EEEB40 /* Products */,
 				C6DD98E37DEFFCA873B67608 /* Pods */,
 				3B747CA8FF6EB5268D0325BB /* Frameworks */,
@@ -171,6 +196,7 @@
 			children = (
 				3EAD10A6245AA36000EEEB40 /* com.dev.mobileStats.app */,
 				3EAD10BC245AA36200EEEB40 /* com.dev.mobileStatsTests.xctest */,
+				3ECB04A4245DA984004708D9 /* com.dev.mobileStatsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,6 +269,26 @@
 			path = MockData;
 			sourceTree = "<group>";
 		};
+		3ECB04A5245DA984004708D9 /* com.dev.mobileStatsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3ECB04AE245DB0E3004708D9 /* MockData */,
+				3ECB04A6245DA984004708D9 /* com_dev_mobileStatsUITests.swift */,
+				3ECB04A8245DA984004708D9 /* Info.plist */,
+			);
+			path = com.dev.mobileStatsUITests;
+			sourceTree = "<group>";
+		};
+		3ECB04AE245DB0E3004708D9 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				3ECB04AF245DB112004708D9 /* response-mock-UI.json */,
+				3ECB04B1245DB232004708D9 /* MockedData.swift */,
+				3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
 		C6DD98E37DEFFCA873B67608 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +341,24 @@
 			productReference = 3EAD10BC245AA36200EEEB40 /* com.dev.mobileStatsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		3ECB04A3245DA984004708D9 /* com.dev.mobileStatsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3ECB04AB245DA984004708D9 /* Build configuration list for PBXNativeTarget "com.dev.mobileStatsUITests" */;
+			buildPhases = (
+				3ECB04A0245DA984004708D9 /* Sources */,
+				3ECB04A1245DA984004708D9 /* Frameworks */,
+				3ECB04A2245DA984004708D9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3ECB04AA245DA984004708D9 /* PBXTargetDependency */,
+			);
+			name = com.dev.mobileStatsUITests;
+			productName = com.dev.mobileStatsUITests;
+			productReference = 3ECB04A4245DA984004708D9 /* com.dev.mobileStatsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -309,6 +373,10 @@
 						CreatedOnToolsVersion = 11.4.1;
 					};
 					3EAD10BB245AA36200EEEB40 = {
+						CreatedOnToolsVersion = 11.4.1;
+						TestTargetID = 3EAD10A5245AA36000EEEB40;
+					};
+					3ECB04A3245DA984004708D9 = {
 						CreatedOnToolsVersion = 11.4.1;
 						TestTargetID = 3EAD10A5245AA36000EEEB40;
 					};
@@ -329,6 +397,7 @@
 			targets = (
 				3EAD10A5245AA36000EEEB40 /* com.dev.mobileStats */,
 				3EAD10BB245AA36200EEEB40 /* com.dev.mobileStatsTests */,
+				3ECB04A3245DA984004708D9 /* com.dev.mobileStatsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -353,6 +422,15 @@
 				3ECB049D245DA4C6004708D9 /* response-empty-success.json in Resources */,
 				3ECB0487245D8755004708D9 /* response-success.json in Resources */,
 				3EB09BDB245BD203003A87E1 /* MobileUsageTableViewHeader.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3ECB04A2245DA984004708D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ECB04B4245DB5AF004708D9 /* response-empty-mock-UI.json in Resources */,
+				3ECB04B0245DB112004708D9 /* response-mock-UI.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +541,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		3ECB04A0245DA984004708D9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ECB04B2245DB232004708D9 /* MockedData.swift in Sources */,
+				3ECB04A7245DA984004708D9 /* com_dev_mobileStatsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -470,6 +557,11 @@
 			isa = PBXTargetDependency;
 			target = 3EAD10A5245AA36000EEEB40 /* com.dev.mobileStats */;
 			targetProxy = 3EAD10BD245AA36200EEEB40 /* PBXContainerItemProxy */;
+		};
+		3ECB04AA245DA984004708D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3EAD10A5245AA36000EEEB40 /* com.dev.mobileStats */;
+			targetProxy = 3ECB04A9245DA984004708D9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -693,6 +785,44 @@
 			};
 			name = Release;
 		};
+		3ECB04AC245DA984004708D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5WXZ4A49L5;
+				INFOPLIST_FILE = com.dev.mobileStatsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cytay.com-dev-mobileStatsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = com.dev.mobileStats;
+			};
+			name = Debug;
+		};
+		3ECB04AD245DA984004708D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5WXZ4A49L5;
+				INFOPLIST_FILE = com.dev.mobileStatsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "cytay.com-dev-mobileStatsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = com.dev.mobileStats;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -719,6 +849,15 @@
 			buildConfigurations = (
 				3EAD10C9245AA36200EEEB40 /* Debug */,
 				3EAD10CA245AA36200EEEB40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3ECB04AB245DA984004708D9 /* Build configuration list for PBXNativeTarget "com.dev.mobileStatsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3ECB04AC245DA984004708D9 /* Debug */,
+				3ECB04AD245DA984004708D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
