@@ -1,6 +1,6 @@
 # SPHTechMobileAssignment
 
-Status: Completed
+Status: WIP
 
 Installation step:
 Build the project by creating or using a scheme that target "com.dev.mobileStats"
