@@ -167,7 +167,7 @@ class ViewController: UIViewController {
                 if let result = response.result, let records = result.records{
                     
                     self.mobileUsageData = MobileUsageData(records, fmt: .Year)
-                    self.mobileUsageData.setFilter(minYear: 2008, maxYear: 2019)
+                    self.mobileUsageData.setFilter(minYear: 2008, maxYear: 2018)
                     
                     self.tableView.reloadData()
                     DispatchQueue.global(qos: .utility).async {
