@@ -41,6 +41,28 @@ class com_dev_mobileStatsTests: XCTestCase {
         
         waitForExpectations(timeout: 10.0, handler: nil)
     }
+    
+    ///Test if data is not nil if success is false
+    func testGetDataOnSuccessStateIsFalse() throws {
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
+        
+        let exp = expectation(description: "expecting to get success = false in response")
+
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithFailureState.data])
+        mock.register()
+        
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            XCTAssertNotNil(response.success)
+            XCTAssertFalse(response.success!)
+            exp.fulfill()
+        }, fail: { (err) in
+            XCTFail("Should not fail")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
 
     ///Test if there is error when http status 500 is returned
     func testWhenHitInternalServerError() throws {
@@ -141,6 +163,135 @@ class com_dev_mobileStatsTests: XCTestCase {
         })
         
         waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    ///Test if able to notice last set of data is having a decrease in volume and first set is not having a decrease
+    func testDetectDecreaseIsWorking() throws{
+        let exp = expectation(description: "expecting to be able to detect decrease")
+
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithDataHasDecrease.data])
+        mock.register()
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            if let result = response.result, let records = result.records{
+                let mobileUsageData = MobileUsageData(records, fmt: .Year)
+                //Have decrease
+                let lastRecord = mobileUsageData.get(mobileUsageData.count - 1)
+                XCTAssertNotNil(lastRecord.data)
+                XCTAssertTrue(lastRecord.data!.hasDecreaseInQuater)
+                
+                //No decrease
+                let firstRecord = mobileUsageData.get(0)
+                XCTAssertNotNil(firstRecord.data)
+                XCTAssertFalse(firstRecord.data!.hasDecreaseInQuater)
+            }
+            else{
+               XCTFail("Should not fail")
+            }
+            exp.fulfill()
+            
+        }, fail: { (err) in
+            XCTFail("Should not fail")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    ///Test MobileUsageData is not throwing exception when access out of bound index
+    func testListWhenAccessedOutOfBoundIndex() throws{
+        let exp = expectation(description: "expecting out of bound index access not to fail")
+
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithDataHasDecrease.data])
+        mock.register()
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            if let result = response.result, let records = result.records{
+                let mobileUsageData = MobileUsageData(records, fmt: .Year)
+                let index = mobileUsageData.count
+                XCTAssertNotNil(mobileUsageData.get(index + 1))
+                XCTAssertNil(mobileUsageData.get(index + 1).data)
+            }
+            else{
+               XCTFail("Should not fail")
+            }
+            exp.fulfill()
+            
+        }, fail: { (err) in
+            XCTFail("Should not fail")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    ///Test MobileUsageData filtering logic is working and proper data is returned for use
+    func testFilteredRangeListIsCorrect() throws{
+        let exp = expectation(description: "expecting filter to work")
+
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithDataHasDecrease.data])
+        mock.register()
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            if let result = response.result, let records = result.records{
+                let mobileUsageData = MobileUsageData(records, fmt: .Year)
+                mobileUsageData.setFilter(minYear: 2016, maxYear: 2018)
+                XCTAssertEqual(mobileUsageData.count, 1)
+            }
+            else{
+               XCTFail("Should not fail")
+            }
+            exp.fulfill()
+            
+        }, fail: { (err) in
+            XCTFail("Should not fail")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+    }
+    
+    ///Test if save and get offline content function is working
+    func testAbleToSaveAndGetOfflineContent() throws{
+        let exp = expectation(description: "expecting to be able to save for offline content access")
+
+        let mockServiceApiClient = MobileDataAPIClient.mock()
+        let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
+        let mock = Mock(url: originalURL, ignoreQuery: true, dataType: .json, statusCode: 200, data: [.get : MockedData.successWithData.data])
+        mock.register()
+        mockServiceApiClient.requestDataUsage(numberOfItems: 5, offset: 0, completion: {}, success: { (response) in
+            let result = self.trySaveAndGetJSON(response: response)
+            XCTAssertTrue(result)
+            exp.fulfill()
+            
+        }, fail: { (err) in
+            XCTFail("Should not fail")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10.0, handler: nil)
+        
+    }
+    
+    /**
+     Function to use to simulate similar usage in ViewController call for test case `testAbleToSaveAndGetOfflineContent()`
+        - Parameters:
+            - response: Data returned from network request
+        - Returns:
+                Boolean state true if inputs is able to be save and read out properly else false
+     */
+    private func trySaveAndGetJSON(response: MobileDataUsageResponse) -> Bool{
+        do{
+            try OfflineCacheManager.mock().saveJSON(array: response)
+            let result = try OfflineCacheManager.mock().readJSON(MobileDataUsageResponse.self)
+            return result != nil
+        }
+        catch{
+            return false
+        }
     }
 
 }

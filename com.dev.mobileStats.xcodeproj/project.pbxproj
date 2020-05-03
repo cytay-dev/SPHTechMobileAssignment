@@ -44,6 +44,9 @@
 		3ECB04B0245DB112004708D9 /* response-mock-UI.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB04AF245DB112004708D9 /* response-mock-UI.json */; };
 		3ECB04B2245DB232004708D9 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECB04B1245DB232004708D9 /* MockedData.swift */; };
 		3ECB04B4245DB5AF004708D9 /* response-empty-mock-UI.json in Resources */ = {isa = PBXBuildFile; fileRef = 3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */; };
+		3EF1DFFA245E8C76000D1025 /* response-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1DFF9245E8C76000D1025 /* response-failure.json */; };
+		3EF1DFFC245E8E2E000D1025 /* response-data-last-decrease.json in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1DFFB245E8E2E000D1025 /* response-data-last-decrease.json */; };
+		3EF1DFFE245E915F000D1025 /* response-failure.json in Resources */ = {isa = PBXBuildFile; fileRef = 3EF1DFFD245E915F000D1025 /* response-failure.json */; };
 		F1ED9B91144BF584C473AC8D /* Pods_com_dev_mobileStatsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB3C14EFB9EDB7E14DE729D8 /* Pods_com_dev_mobileStatsTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +105,9 @@
 		3ECB04AF245DB112004708D9 /* response-mock-UI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-mock-UI.json"; sourceTree = "<group>"; };
 		3ECB04B1245DB232004708D9 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-empty-mock-UI.json"; sourceTree = "<group>"; };
+		3EF1DFF9245E8C76000D1025 /* response-failure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-failure.json"; sourceTree = "<group>"; };
+		3EF1DFFB245E8E2E000D1025 /* response-data-last-decrease.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-data-last-decrease.json"; sourceTree = "<group>"; };
+		3EF1DFFD245E915F000D1025 /* response-failure.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "response-failure.json"; sourceTree = "<group>"; };
 		41A8C8934D20D248F8C4EB9E /* Pods-com.dev.mobileStats.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.dev.mobileStats.debug.xcconfig"; path = "Target Support Files/Pods-com.dev.mobileStats/Pods-com.dev.mobileStats.debug.xcconfig"; sourceTree = "<group>"; };
 		451E2634112EEC16C1B83479 /* Pods-com.dev.mobileStatsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.dev.mobileStatsTests.release.xcconfig"; path = "Target Support Files/Pods-com.dev.mobileStatsTests/Pods-com.dev.mobileStatsTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0CE0F2BE8920764FDDE1816 /* Pods-com.dev.mobileStats.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-com.dev.mobileStats.release.xcconfig"; path = "Target Support Files/Pods-com.dev.mobileStats/Pods-com.dev.mobileStats.release.xcconfig"; sourceTree = "<group>"; };
@@ -312,6 +318,8 @@
 			children = (
 				3ECB0485245D8755004708D9 /* response-success.json */,
 				3ECB049C245DA4C6004708D9 /* response-empty-success.json */,
+				3EF1DFF9245E8C76000D1025 /* response-failure.json */,
+				3EF1DFFB245E8E2E000D1025 /* response-data-last-decrease.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 			children = (
 				3ECB04B3245DB5AF004708D9 /* response-empty-mock-UI.json */,
 				3ECB04AF245DB112004708D9 /* response-mock-UI.json */,
+				3EF1DFFD245E915F000D1025 /* response-failure.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -455,7 +464,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF1DFFC245E8E2E000D1025 /* response-data-last-decrease.json in Resources */,
 				3ECB049D245DA4C6004708D9 /* response-empty-success.json in Resources */,
+				3EF1DFFA245E8C76000D1025 /* response-failure.json in Resources */,
 				3ECB0487245D8755004708D9 /* response-success.json in Resources */,
 				3EB09BDB245BD203003A87E1 /* MobileUsageTableViewHeader.xib in Resources */,
 			);
@@ -465,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF1DFFE245E915F000D1025 /* response-failure.json in Resources */,
 				3ECB04B4245DB5AF004708D9 /* response-empty-mock-UI.json in Resources */,
 				3ECB04B0245DB112004708D9 /* response-mock-UI.json in Resources */,
 			);

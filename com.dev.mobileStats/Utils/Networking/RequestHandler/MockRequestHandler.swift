@@ -26,6 +26,7 @@ class MockRequestHandler: RequestHandler{
     // MARK: - Initialization
     init(){
         //Setup mock if is for UI Testing
+        #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
             if let jsonString = ProcessInfo.processInfo.environment["MockData"], let data = jsonString.data(using: .utf8) {
                 let originalURL = URL(string: MobileDataAPIClient.MOBILE_DATA_API_URL)!
@@ -51,6 +52,7 @@ class MockRequestHandler: RequestHandler{
                 mock.register()
             }
         }
+        #endif
     }
     
     // MARK: - Functions

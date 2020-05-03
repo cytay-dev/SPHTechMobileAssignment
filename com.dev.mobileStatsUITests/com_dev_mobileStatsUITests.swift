@@ -48,6 +48,18 @@ class com_dev_mobileStatsUITests: XCTestCase {
         XCTAssertEqual("No Mobile Usage data is available", lbl.label)
     }
     
+    ///Test if table is empty when there is no data
+    func testWhenSuccessIsFalseMessage() throws{
+        let app = XCUIApplication()
+        app.launchArguments += ["UI-TESTING"]
+        app.launchEnvironment["MockData"] = MockedData.successWithFailureState.string
+        app.launch()
+       
+        let lbl = app.staticTexts["Error retrieving data from Data.gov.sg"]
+        XCTAssertNotNil(lbl)
+        XCTAssertEqual("Error retrieving data from Data.gov.sg", lbl.label)
+    }
+    
     ///Test if is there is no image when the row with data that has no decrease in volume in its quarters
     func testRowWithoutDecreaseHasNoImage() throws{
         let app = XCUIApplication()
@@ -106,6 +118,19 @@ class com_dev_mobileStatsUITests: XCTestCase {
 
     }
     
+    ///Test where there is no internet
+    func testWhenThereIsNoInternet() throws{
+        let app = XCUIApplication()
+        app.launchArguments += ["UI-TESTING"]
+        app.launchEnvironment["MockData"] = MockedData.response.string
+        app.launchEnvironment["MockInternetState"] = "N"
+        app.launch()
+       
+        let lbl = app.staticTexts["Using offline content"]
+        XCTAssertNotNil(lbl)
+        XCTAssertEqual("Using offline content", lbl.label)
+    }
+    
     ///Test when 500 status is returned from network call
     func testInternalErrorMessage() throws{
         let app = XCUIApplication()
@@ -142,6 +167,20 @@ class com_dev_mobileStatsUITests: XCTestCase {
         let lbl = app.staticTexts["Something went wrong. Please try again."]
         XCTAssertNotNil(lbl)
         XCTAssertEqual("Something went wrong. Please try again.", lbl.label)
+    }
+    
+    ///Test when 404 status is returned from network call and refresh button is available and clickable
+    func testRefreshButtonWhenErrorOccur() throws{
+        let app = XCUIApplication()
+        app.launchArguments += ["UI-TESTING"]
+        app.launchEnvironment["MockData"] = MockedData.response.string
+        app.launchEnvironment["FailureCase"] = "404"
+        app.launch()
+        
+        let btn = app.buttons["Click to refresh"]
+        XCTAssertNotNil(btn)
+        XCTAssertTrue(btn.exists)
+        XCTAssertTrue(btn.isHittable)
     }
 
 }

@@ -91,14 +91,6 @@ class MobileUsageData{
         initRecords()
     }
     
-    init(_ records:[Record]){
-        self.raw_records = records
-        self.records = [Int:UsageData]()
-        self.records_InUse = [Int:UsageData]()
-        self.format = .Default
-        initRecords()
-    }
-    
     init(_ records:[Record], fmt: RecordReportFormat){
         self.raw_records = records
         self.records = [Int:UsageData]()

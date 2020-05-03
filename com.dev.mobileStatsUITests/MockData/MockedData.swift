@@ -10,6 +10,7 @@ import Foundation
 public final class MockedData{
     public static let response: URL = Bundle(for: MockedData.self).url(forResource: "response-mock-UI", withExtension: "json")!
     public static let responseEmpty: URL = Bundle(for: MockedData.self).url(forResource: "response-empty-mock-UI", withExtension: "json")!
+    public static let successWithFailureState: URL = Bundle(for: MockedData.self).url(forResource: "response-failure", withExtension: "json")!
 }
 
 internal extension URL {

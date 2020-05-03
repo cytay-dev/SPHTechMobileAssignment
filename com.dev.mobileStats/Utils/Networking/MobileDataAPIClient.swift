@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import Reachability
+
 /**
  API Client class to access Data.gov.sg to get mobile data usage information
  */
@@ -32,19 +34,17 @@ class MobileDataAPIClient : APIClient{
     private let mobileApiUrl = MobileDataAPIClient.MOBILE_DATA_API_URL
     private var requestHandler: RequestHandler
     
+    private var environmentInUse : APIEnvironment
+    
     private static var sharedAPIClient: MobileDataAPIClient = {
+        //UI Testing should be done only in debug build
+        #if DEBUG
         if ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
             return MobileDataAPIClient(environment: .mock)
         }
-        else{
-            return MobileDataAPIClient(environment: .production)
-        }
-    }()
-    
-    private static var productionAPIClient: MobileDataAPIClient = {
-        let mgr = MobileDataAPIClient(environment: .production)
-        //Do configuration next time
-        return mgr
+        #endif
+        return MobileDataAPIClient(environment: .production)
+
     }()
     
     private static var mockAPIClient: MobileDataAPIClient = {
@@ -56,18 +56,10 @@ class MobileDataAPIClient : APIClient{
     // MARK: - Functions
     /**
      Instance for accessing api client.
-     - Important: Supported for use in **debug**, **release** and **UI Testing** build
+     - Important: Supported for use in **debug**, **release** and **UI Testing** build. Use this for release build
      */
     class func shared() -> MobileDataAPIClient {
         return sharedAPIClient
-    }
-    
-    /**
-    Instance for accessing api client.
-    - Important: Supported for use in **release** build only
-    */
-    class func production() -> MobileDataAPIClient {
-        return productionAPIClient
     }
     
     /**
@@ -84,15 +76,13 @@ class MobileDataAPIClient : APIClient{
         - Parameters:
             - environment: The environment the api cilent is to be initialized for
      */
-    init(environment: APIEnvironment){
+    private init(environment: APIEnvironment){
+        environmentInUse = environment
         switch environment {
         case .production:
             requestHandler = NetworkRequestHandler()
         case .mock:
             requestHandler = MockRequestHandler()
-        default:
-            //Default use actual
-            requestHandler = NetworkRequestHandler()
             
         }
     }
@@ -120,6 +110,32 @@ class MobileDataAPIClient : APIClient{
                 case .failure(let error):
                     fail(error)
             }
+        }
+    }
+    
+    ///Check if internet is available
+    func isNetworkAvailable() -> Bool{
+        do{
+            #if DEBUG
+            //For testing network is always unavailable. However UI Test cases can control the result for UI manipulation. UI Test cases need to simulate internet available
+            if environmentInUse == .mock {
+                if ProcessInfo.processInfo.arguments.contains("UI-TESTING") {
+                    if let state = ProcessInfo.processInfo.environment["MockInternetState"]{
+                        return state == "Y"
+                    }
+                    else{
+                        return true
+                    }
+                }
+                return false
+            }
+            #endif
+            
+            return try Reachability().connection != .unavailable
+        }
+        catch{
+            print(error)
+            return false
         }
     }
 }

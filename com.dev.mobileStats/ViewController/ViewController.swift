@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import Reachability
 
 /**
  Main viewcontroller to show listing of mobile data usage information in overview
@@ -71,16 +70,11 @@ class ViewController: UIViewController {
         lblOfflineContent.text = ""
         activityIndicator.startAnimating()
         refreshControl.isEnabled = true
-        do{
-            if try Reachability().connection == .unavailable{
-                loadOfflineCache()
-                self.activityIndicator.stopAnimating()
-                self.refreshControl.endRefreshing()
-                return
-            }
-        }
-        catch{
-            print(error)
+        if !MobileDataAPIClient.shared().isNetworkAvailable(){
+            loadOfflineCache()
+            self.activityIndicator.stopAnimating()
+            self.refreshControl.endRefreshing()
+            return
         }
         
         MobileDataAPIClient.shared().requestDataUsage(numberOfItems: numberOfItems, offset: offset,
@@ -172,7 +166,12 @@ class ViewController: UIViewController {
                     self.tableView.reloadData()
                     DispatchQueue.global(qos: .utility).async {
                         if !fromCache {
-                            OfflineCacheManager.shared().saveJSON(array: response)
+                            do{
+                                try OfflineCacheManager.shared().saveJSON(array: response)
+                            }
+                            catch{
+                                print(error)
+                            }
                         }
                     }
                 }
@@ -186,13 +185,20 @@ class ViewController: UIViewController {
     
     ///Load content from offline cache and update necessary UIs
     private func loadOfflineCache(){
-        if let record = OfflineCacheManager.shared().readJSON(MobileDataUsageResponse.self){
-            toggleShowTableView(true)
-            populateData(response: record, fromCache: true)
-            refreshControl.isEnabled = false
-            lblOfflineContent.text = "Using offline content"
+        do{
+            if let record = try OfflineCacheManager.shared().readJSON(MobileDataUsageResponse.self){
+                toggleShowTableView(true)
+                populateData(response: record, fromCache: true)
+                refreshControl.isEnabled = false
+                lblOfflineContent.text = "Using offline content"
+            }
+            else{
+                toggleShowTableView(false, message: "Internet is unavailable")
+                }
+            
         }
-        else{
+        catch{
+            print(error)
             toggleShowTableView(false, message: "Internet is unavailable")
         }
     }

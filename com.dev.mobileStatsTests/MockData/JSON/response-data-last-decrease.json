@@ -1,0 +1,90 @@
+{
+  "help": "https://data.gov.sg/api/3/action/help_show?name=datastore_search",
+  "success": true,
+  "result": {
+    "resource_id": "a807b7ab-6cad-4aa6-87d0-e283a7353a0f",
+    "fields": [
+      {
+        "type": "int4",
+        "id": "_id"
+      },
+      {
+        "type": "text",
+        "id": "quarter"
+      },
+      {
+        "type": "numeric",
+        "id": "volume_of_mobile_data"
+      }
+    ],
+    "records": [
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2014-Q1",
+        "_id": 1
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2014-Q2",
+        "_id": 2
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2014-Q3",
+        "_id": 3
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2014-Q4",
+        "_id": 4
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2015-Q1",
+        "_id": 5
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2015-Q2",
+        "_id": 6
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2015-Q3",
+        "_id": 7
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2015-Q4",
+        "_id": 8
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2016-Q1",
+        "_id": 9
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2016-Q2",
+        "_id": 10
+      },
+      {
+        "volume_of_mobile_data": "0",
+        "quarter": "2016-Q3",
+        "_id": 11
+      },
+      {
+        "volume_of_mobile_data": "1",
+        "quarter": "2016-Q4",
+        "_id": 12
+      }
+    ],
+    "_links": {
+      "start": "/api/action/datastore_search?limit=5&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f",
+      "next": "/api/action/datastore_search?offset=5&limit=5&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f"
+    },
+    "limit": 12,
+    "total": 12
+  }
+}
+
